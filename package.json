@@ -2,6 +2,7 @@
   "name": "car-service-platform",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Auto car service booking platform - service stations, time slot booking, live tracking",
   "scripts": {
     "setup": "cd api && npm install && cd ../web && npm install",

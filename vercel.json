@@ -10,8 +10,7 @@
       "src": "web/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist",
-        "installCommand": "npm install"
+        "distDir": "dist"
       }
     }
   ],
@@ -22,10 +21,6 @@
     },
     {
       "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/web/dist/$1"
     }
   ]
 }
