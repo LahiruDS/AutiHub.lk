@@ -1,0 +1,18 @@
+{
+  "name": "car-service-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Auto car service booking platform - service stations, time slot booking, live tracking",
+  "scripts": {
+    "setup": "cd api && npm install && cd ../web && npm install",
+    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "cd api && npm run dev:memory",
+    "dev:api:real": "cd api && npm run dev",
+    "dev:web": "cd web && npm run dev",
+    "seed": "cd api && npm run seed",
+    "build": "cd web && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.4"
+  }
+}
