@@ -47,47 +47,8 @@ export const Landing = () => {
             </div>
           </div>
 
-          <div className="hero-visual" aria-label="Service scheduling overview">
-            <div className="visual-card">
-              <div className="visual-header">
-                <div className="visual-dots">
-                  <span className="dot dot-red" />
-                  <span className="dot dot-yellow" />
-                  <span className="dot dot-green" />
-                </div>
-                <span className="visual-label">AutoCare</span>
-              </div>
-
-              <div className="service-pill">Next service: 9:00 AM</div>
-
-              <div className="car-card">
-                <div className="car-card-top">
-                  <span className="car-name">Toyota Prius</span>
-                  <span className="status-chip">Ready</span>
-                </div>
-                <div className="car-progress">
-                  <span className="progress-bar" />
-                </div>
-                <div className="car-meta">
-                  <span>Oil change</span>
-                  <span>2 of 3 steps</span>
-                </div>
-              </div>
-
-              <div className="visual-row">
-                <div className="mini-stat">
-                  <strong>4.9/5</strong>
-                  <span>Average rating</span>
-                </div>
-                <div className="mini-stat">
-                  <strong>1,240</strong>
-                  <span>Happy drivers</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="floating-badge badge-top">Live updates</div>
-            <div className="floating-badge badge-bottom">+2,400 bookings</div>
+          <div className="hero-visual">
+            <img src="/img4.png" alt={APP.name} className="hero-image" />
           </div>
         </div>
       </section>
@@ -173,7 +134,7 @@ export const Landing = () => {
             <h4>Support</h4>
             <p className="small"><a href={`tel:${APP.supportPhone}`}>{APP.supportPhone}</a></p>
             <p className="small"><a href={`mailto:${APP.supportEmail}`}>{APP.supportEmail}</a></p>
-            <p className="small">Mon - Sat: 8:00 AM - 8:00 PM</p>
+            <p className="small">Always open!</p>
             <p className="small">No. 72, Akuressa Rd, Matara, Sri Lanka</p>
           </div>
         </div>

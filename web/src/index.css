@@ -540,6 +540,16 @@ select.select { cursor: pointer; }
   justify-content: center;
   align-items: center;
   min-height: 430px;
+  width: 100%;
+}
+.hero-image {
+  display: block;
+  width: 500px;
+  max-height: 700px;
+  object-fit: contain;
+  border-radius: 26px;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.28);
+  filter: drop-shadow(0 16px 28px rgba(14, 116, 144, 0.26));
 }
 .visual-card {
   width: min(100%, 430px);
