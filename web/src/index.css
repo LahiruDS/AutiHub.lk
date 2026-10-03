@@ -544,8 +544,8 @@ select.select { cursor: pointer; }
 }
 .hero-image {
   display: block;
-  width: 500px;
-  max-height: 700px;
+  width: min(100%, 600px);
+  max-height: 600px;
   object-fit: contain;
   border-radius: 26px;
   box-shadow: 0 30px 70px rgba(15, 23, 42, 0.28);
