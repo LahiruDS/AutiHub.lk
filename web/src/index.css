@@ -745,14 +745,17 @@ select.select { cursor: pointer; }
   justify-content: center;
   min-width: 128px;
   height: 52px;
+  padding: 8px 12px;
+  border-radius: 14px;
 }
 .footer-logo:hover { text-decoration: none; }
 .footer-logo-img {
-  display: block;
-  max-height: 56px;
+  
+  max-height: 57px;
   width: auto;
+  max-width: 160px;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 0px;
   filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.2));
 }
 .footer-copy {

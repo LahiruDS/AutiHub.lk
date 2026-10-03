@@ -145,7 +145,7 @@ export const Landing = () => {
         <div className="container footer-grid">
           <div className="footer-brand">
             <Link to="/" className="footer-logo" aria-label={APP.name}>
-              <img src="/img2.jfif" alt={APP.name} className="footer-logo-img" />
+              <img src="/img2.png" alt={APP.name} className="footer-logo-img" />
             </Link>
             <p className="small footer-copy">{APP.tagline}</p>
             <p className="small footer-copy">
@@ -174,12 +174,12 @@ export const Landing = () => {
             <p className="small"><a href={`tel:${APP.supportPhone}`}>{APP.supportPhone}</a></p>
             <p className="small"><a href={`mailto:${APP.supportEmail}`}>{APP.supportEmail}</a></p>
             <p className="small">Mon - Sat: 8:00 AM - 8:00 PM</p>
-            <p className="small">No. 18, Galle Road, Colombo 03</p>
+            <p className="small">No. 72, Akuressa Rd, Matara, Sri Lanka</p>
           </div>
         </div>
 
         <div className="container footer-bottom">
-          <p className="small">© 2026 {APP.name}. All rights reserved.</p>
+          <p className="small">© 2026 {APP.name}. All rights reserved. Developed By Lahiru De Silva.</p>
           <div className="footer-socials">
             <a href="https://facebook.com" target="_blank" rel="noreferrer">Facebook</a>
             <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
