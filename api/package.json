@@ -1,18 +1,28 @@
 {
-  "name": "car-service-platform",
+  "name": "car-service-platform-api",
   "version": "1.0.0",
   "private": true,
-  "description": "Auto car service booking platform - service stations, time slot booking, live tracking",
+  "type": "module",
+  "main": "index.js",
   "scripts": {
-    "setup": "cd api && npm install && cd ../web && npm install",
-    "dev": "concurrently \"npm run dev:api\" \"npm run dev:web\"",
-    "dev:api": "cd api && npm run dev:memory",
-    "dev:api:real": "cd api && npm run dev",
-    "dev:web": "cd web && npm run dev",
-    "seed": "cd api && npm run seed",
-    "build": "cd web && npm run build"
+    "dev": "node --watch index.js",
+    "dev:memory": "node dev-memory.js",
+    "start": "node index.js",
+    "seed": "node seed.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.0",
+    "morgan": "^1.0.0",
+    "nodemailer": "^10.0.13"
   },
   "devDependencies": {
-    "concurrently": "^9.2.4"
+    "mongodb-memory-server": "^11.3.0"
   }
 }
