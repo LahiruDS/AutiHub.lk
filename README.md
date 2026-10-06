@@ -1,43 +1,53 @@
 # AutoCare — Car Service Booking Platform
 
-Customers ගෙන්තුවන්ට service stations සොයාගන්න, service + price බලා time slot book කරන්න, සහ station එක ඇතුළේ service එක කරන අතර **live tracking** කරන සම්පූර්ණ platform එකක්.
+A complete platform that allows customers to find service stations, view available services and prices, book time slots, and **track the service progress live** while their vehicle is being serviced at the station.
 
 **Stack:** React 18 + Vite (frontend) · Express + Mongoose (backend) · MongoDB · Vercel (hosting)
 
 ---
 
-## 1. Quick start (run කරන්න)
+## 1. Quick Start
 
-පහත project root folder එකේදී terminal **දෙකක්** විවෘත කරන්න.
+Open **two terminals** in the project root folder.
 
 ### Terminal 1 — Backend (API)
+
 ```bash
 cd "D:\My projects\car-service-platform"
 npm run dev:api
 ```
-- API: `http://localhost:5000/api`
-- Health check: `http://localhost:5000/api/health`
-- මේක **temporary in-memory MongoDB** එකක් start කරලා demo data එක seed කරනවා. MongoDB install කරන්න ඕනේ නැහැ.
-- මුල් වරට පමණක් `mongodb-memory-server` binary එක download කරනවා (~2-3 min ගත වෙයි).
+
+* API: `http://localhost:5000/api`
+* Health check: `http://localhost:5000/api/health`
+* This starts a **temporary in-memory MongoDB** and seeds demo data. MongoDB does not need to be installed.
+* The `mongodb-memory-server` binary is downloaded only the first time. This may take approximately 2–3 minutes.
 
 ### Terminal 2 — Frontend (React)
+
 ```bash
 cd "D:\My projects\car-service-platform"
 npm run dev:web
 ```
-- App: `http://localhost:5173`
 
-### Demo accounts (password එකම: `password123`)
-| Role | Email |
-|---|---|
-| Customer | `customer@autocare.lk` |
-| Station | `cityauto@autocare.lk` |
-| Station | `expresslube@autocare.lk` |
-| Station | `premiumbody@autocare.lk` |
+* App: `http://localhost:5173`
 
-Customer account එකෙන් book කරලා, station account එකෙන් (`cityauto@autocare.lk`) login වුණට **status change කරන්න** — ඒකෙන් customer ට live progress එක පේනවා (browser දෙකම open කරන්න).
+### Demo Accounts
 
-### පළමු install එක වරටම
+**Password for all accounts:** `password123`
+
+| **Role** | **Email**                 |
+| -------- | ------------------------- |
+| Customer | `customer@autocare.lk`    |
+| Station  | `cityauto@autocare.lk`    |
+| Station  | `expresslube@autocare.lk` |
+| Station  | `premiumbody@autocare.lk` |
+
+Log in using the customer account and make a booking. Then log in to a station account, such as `cityauto@autocare.lk`, and change the booking status. The customer will then be able to see the live service progress. For the best demonstration, keep both browser sessions open.
+
+### First-Time Installation
+
+Run the following command only during the initial setup:
+
 ```bash
 npm run setup
 ```
@@ -46,87 +56,111 @@ npm run setup
 
 ## 2. Scripts
 
-| Command | කරන දේ |
-|---|---|
-| `npm run setup` | API + web dependencies install |
-| `npm run dev:api` | API start (temporary MongoDB + demo data) |
-| `npm run dev:api:real` | API start (`.env` එකේ ඇති real MongoDB එකක් භාවිතා කරයි) |
-| `npm run dev:web` | React dev server |
-| `npm run seed` | ඇතුළත MongoDB එකට demo data seed කරයි |
-| `npm run build` | Frontend production build → `web/dist` |
+| **Command**            | **Description**                                            |
+| ---------------------- | ---------------------------------------------------------- |
+| `npm run setup`        | Installs API and web dependencies                          |
+| `npm run dev:api`      | Starts the API with temporary MongoDB and demo data        |
+| `npm run dev:api:real` | Starts the API using the real MongoDB configured in `.env` |
+| `npm run dev:web`      | Starts the React development server                        |
+| `npm run seed`         | Seeds demo data into the in-memory MongoDB                 |
+| `npm run build`        | Creates the frontend production build → `web/dist`         |
 
 ---
 
 ## 3. Features
 
 ### Customer
-- Email registration / login, profile, password change
-- Station browse + search (name, district, city) + service filter
-- Station detail page: working hours, price list, rating breakdown, reviews
-- **Time slot booking wizard**: station → vehicle → services → date → slot → confirm
-- Double-booking prevention (එම slot එකකට booking එකක් ඇති නම් block කරයි)
-- **Live tracking** — තත්පර 4කට එකපාර polling (status, current step, progress %)
-- Booking cancel (pending/confirmed වලදී)
-- Vehicle garage (add / edit / set-as-default / archive) + per-vehicle service history
-- Review ලියන එක completed booking එකකට විතරයි (1 review per booking)
-- In-app notifications inbox + unread badge
+
+* Email registration / login, profile management, and password change
+* Browse and search service stations by name, district, or city
+* Filter stations by available services
+* Station detail page with working hours, price list, rating breakdown, and reviews
+* **Time slot booking wizard:** station → vehicle → services → date → slot → confirmation
+* Double-booking prevention — a time slot is blocked if it already has an existing booking
+* **Live tracking** — polling every 4 seconds to display status, current step, and progress percentage
+* Booking cancellation while the booking is pending or confirmed
+* Vehicle garage with add / edit / set as default / archive functionality
+* Per-vehicle service history
+* Customers can write a review only for completed bookings, with one review allowed per booking
+* In-app notification inbox with unread notification badge
 
 ### Station
-- Station registration (name, address, district, phone, working hours, bays)
-- Dashboard: අද bookings, pending requests, in-progress, revenue, average rating
-- Booking queue filter: pending / confirmed / in progress / on hold / completed / cancelled
-- Booking manage: confirm, start work, on hold, resume, mark step, complete, payment status
-- Service & pricing CRUD (name, category, price, duration, checklist steps, soft delete)
-- Working hours / slot duration මොකක් හරි වෙනස් කරන්න පුළුවන් — slots ඒකට අනුකූලව regenerate වෙයි
-- Customer reviews + reply + hide
-- Station profile edit
+
+* Station registration with name, address, district, phone number, working hours, and number of service bays
+* Dashboard showing today's bookings, pending requests, in-progress services, revenue, and average rating
+* Booking queue filtering by pending / confirmed / in progress / on hold / completed / cancelled
+* Booking management: confirm, start work, put on hold, resume, mark service steps, complete, and update payment status
+* Service and pricing CRUD functionality:
+
+  * Service name
+  * Category
+  * Price
+  * Duration
+  * Checklist steps
+  * Soft delete
+* Working hours and slot duration can be modified, and available slots are regenerated accordingly
+* Manage customer reviews with reply and hide options
+* Edit station profile
 
 ### Admin
-- `User`, `Station`, `Booking`, `Service`, `Review` endpoints (`/api/admin/*`) — station approve/feature, user role මාරු කිරීම
 
-### Booking status flow
-```
+* `User`, `Station`, `Booking`, `Service`, and `Review` endpoints under `/api/admin/*`
+* Approve or feature stations
+* Change user roles
+
+### Booking Status Flow
+
+```text
 pending → confirmed → in_progress ⇄ on_hold → completed
    ↓          ↓            ↓
 cancelled  cancelled    cancelled / no_show
 ```
-එක් එක් status එකට **checklist steps** map කරනවා (උදා: `received → inspection → oil_filter → quality_check → ready`), frontend එකේ progress bar + timeline එකක් ලෙසපෙනේ.
+
+Each booking status is mapped to a set of **checklist steps**. For example:
+
+```text
+received → inspection → oil_filter → quality_check → ready
+```
+
+These steps are displayed in the frontend as a progress bar and timeline.
 
 ---
 
-## 4. Project structure
+## 4. Project Structure
 
-```
+```text
 car-service-platform/
 ├── api/                        # Express backend (Vercel serverless function)
 │   ├── index.js                # App factory + Vercel handler + local listener
-│   ├── dev-memory.js           # Local dev: temp MongoDB + seed + server
+│   ├── dev-memory.js           # Local development: temporary MongoDB + seed + server
 │   ├── seed.js                 # Demo data
 │   ├── models/                 # Mongoose schemas
 │   │   ├── User.js  Station.js  Service.js
 │   │   ├── Vehicle.js  Booking.js  Review.js  Notification.js
 │   ├── controllers/            # Request handlers
 │   ├── routes/                 # Express routers
-│   ├── middleware/             # auth, validate, error
-│   ├── utils/                  # notifier, slots, jwt, ApiError helpers
-│   └── config/                 # constants (currency, statuses, categories)
+│   ├── middleware/             # Authentication, validation, error handling
+│   ├── utils/                  # Notifier, slots, JWT, ApiError helpers
+│   └── config/                 # Constants (currency, statuses, categories)
 │
 └── web/                        # React frontend (Vercel static build)
     ├── src/
-    │   ├── pages/              # customer pages + pages/station/*
+    │   ├── pages/              # Customer pages + pages/station/*
     │   ├── components/         # Navbar, StationCard, SlotPicker, StatusBadge...
     │   ├── context/            # AuthContext, ToastContext
     │   ├── hooks/              # useLiveStatus
-    │   ├── lib/api.js          # axios instance + token handling
-    │   └── config/constants.js # UI labels, formatting helpers
-    └── vite.config.js          # dev proxy → localhost:5000
+    │   ├── lib/api.js          # Axios instance + token handling
+    │   └── config/constants.js # UI labels and formatting helpers
+    └── vite.config.js          # Dev proxy → localhost:5000
 ```
 
 ---
 
-## 5. Environment variables
+## 5. Environment Variables
 
-`api/.env.example` එක copy කරලා `api/.env` කරන්න. Local in-memory DB එකක් භාවිතා කරද්දී **අවම වශයෙන්** මේවා අවශ්‍යයි.
+Copy `api/.env.example` to `api/.env`.
+
+When using the local in-memory database, the following variables are required at minimum:
 
 ```env
 NODE_ENV=development
@@ -148,22 +182,22 @@ SMS_API_URL=
 SMS_API_KEY=
 ```
 
-SMTP / SMS credentials **නොමැතුත්** app එක සම්පූර්ණයෙන්ම ක්‍රියා කරයි — notifications in-app inbox එකට පමණක් save වෙයි.
+Even without SMTP / SMS credentials, the application will work completely. Notifications will simply be saved in the in-app notification inbox.
 
-Frontend ට `.env` ඕනේ නැහැ; dev එකේ Vite proxy `localhost:5000` ටම forward කරයි.
+The frontend does not require an `.env` file. During development, the Vite proxy forwards requests directly to `localhost:5000`.
 
 ---
 
-## 6. Vercel deployment
+## 6. Vercel Deployment
 
-Repository එක GitHub එකට push කරලා Vercel connect කරන්න. `vercel.json` දැනටමත් configure කර ඇත:
+Push the repository to GitHub and connect it to Vercel. The `vercel.json` file is already configured.
 
-- `api/index.js` → Node.js serverless function (`/api/*` requests)
-- `web` → static build (Vite `dist`, SPA fallback ඇතිව)
+* `api/index.js` → Node.js serverless function (`/api/*` requests)
+* `web` → Static build (Vite `dist`) with SPA fallback
 
-Vercel dashboard එකේ **Settings → Environment Variables** වලට මේවා add කරන්න:
+Add the following environment variables in the **Vercel Dashboard → Settings → Environment Variables**:
 
-```
+```env
 MONGO_URI     = mongodb+srv://...        (MongoDB Atlas)
 JWT_SECRET    = <long random string>
 JWT_EXPIRES_IN= 7d
@@ -172,31 +206,32 @@ SMTP_*        = (optional)
 SMS_API_*     = (optional)
 ```
 
-MongoDB Atlas නොමැතිදා deployment එකට data persist වෙන්නේ නැහැ — Atlas (free tier) එකක් free එකක් හදාගන්න.
+Without MongoDB Atlas, data will not persist after deployment. Create a MongoDB Atlas free-tier database for persistent data storage.
 
 ---
 
-## 7. Common changes
+## 7. Common Changes
 
-| මොකක්ද වෙනස් කරන්න? | ගොනු |
-|---|---|
-| Currency / price format | `web/src/config/constants.js` → `formatMoney` |
-| Booking statuses, UI labels | `web/src/config/constants.js` + `api/config/constants.js` |
-| Service categories | `api/models/Service.js` → `SERVICE_CATEGORIES` |
-| Checklist steps per service | service record එකේ `steps` field (station UI එකෙන් edit කරයි) |
-| Booking history පෙන්වන labels | `api/models/Booking.js` → `STATUS_MESSAGES` |
-| Polling interval | `web/src/hooks/useLiveStatus.js` → `POLL_INTERVAL` |
-| Max advance booking days | `api/config/constants.js` → `maxBookableDate` |
-| Email templates | `api/utils/notifier.js` |
+| **What to Change**             | **File / Location**                                                |
+| ------------------------------ | ------------------------------------------------------------------ |
+| Currency / price format        | `web/src/config/constants.js` → `formatMoney`                      |
+| Booking statuses and UI labels | `web/src/config/constants.js` + `api/config/constants.js`          |
+| Service categories             | `api/models/Service.js` → `SERVICE_CATEGORIES`                     |
+| Checklist steps per service    | `steps` field in the service record (editable from the station UI) |
+| Booking history labels         | `api/models/Booking.js` → `STATUS_MESSAGES`                        |
+| Polling interval               | `web/src/hooks/useLiveStatus.js` → `POLL_INTERVAL`                 |
+| Maximum advance booking days   | `api/config/constants.js` → `maxBookableDate`                      |
+| Email templates                | `api/utils/notifier.js`                                            |
 
 ---
 
-## 8. API reference (සංක්ෂිප්ත)
+## 8. API Reference
 
-Base URL: `/api`
+**Base URL:** `/api`
 
-**Auth**
-```
+### Authentication
+
+```text
 POST   /auth/register/customer
 POST   /auth/register/station
 POST   /auth/login
@@ -205,8 +240,9 @@ PATCH  /auth/me
 PATCH  /auth/password
 ```
 
-**Stations**
-```
+### Stations
+
+```text
 GET    /stations                    ?search=&district=&city=&service=&page=&limit=
 GET    /stations/:idOrSlug
 GET    /stations/me                 (station auth)
@@ -216,8 +252,9 @@ GET    /admin/stations              (admin)
 PATCH  /admin/stations/:id          (admin)
 ```
 
-**Bookings**
-```
+### Bookings
+
+```text
 GET    /bookings/slots               ?stationId=&date=
 GET    /bookings/dates               ?stationId=
 POST   /bookings                     (customer) validate('booking')
@@ -227,8 +264,9 @@ GET    /bookings/:id                 (owner or station)
 PATCH  /bookings/:id/status          { status, note, currentStep, paymentStatus }
 ```
 
-**Services / Vehicles / Reviews / Notifications**
-```
+### Services / Vehicles / Reviews / Notifications
+
+```text
 GET    /services                     public ?station=&category=
 POST   /services                     (station)
 PATCH  /services/:id                 (station)
@@ -240,7 +278,7 @@ POST   /vehicles                     (customer)
 PATCH  /vehicles/:id                 (customer)
 DELETE /vehicles/:id                 (customer)
 
-POST   /reviews                      (customer) completed booking එකකට විතරයි
+POST   /reviews                      (customer) completed booking only
 GET    /reviews/station/:stationId   public ?page=&limit=&minRating=
 PATCH  /reviews/:id/reply            (station)
 PATCH  /reviews/:id/visibility       (station)
@@ -254,9 +292,10 @@ PATCH  /notifications/:id/read       (auth)
 
 ## 9. Troubleshooting
 
-| Problem | Fix |
-|---|---|
-| `EADDRINUSE :5000` | කලින්ගේ API process එක නවත්තන්න — `Get-Process node \| Stop-Process -Force` |
-| `mongodb-memory-server` download fail | internet connection check කරලා නැවත try කරන්න |
-| Frontend එකේ API calls fail | Terminal 1 එකේ API run වෙයි දැයි බලන්න (`/api/health`) |
-| Data persist වෙන්නේ නැහැ | In-memory DB එකක් — `npm run dev:api:real` + real `MONGO_URI` භාවිතා කරන්න |
+| **Problem**                            | **Fix**                                                                                            |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `EADDRINUSE :5000`                     | Stop the previously running API process — `Get-Process node \| Stop-Process -Force`                |
+| `mongodb-memory-server` download fails | Check your internet connection and try again                                                       |
+| Frontend API calls fail                | Make sure the API is running in Terminal 1 and check `/api/health`                                 |
+| Data is not persistent                 | The application is using an in-memory database. Use `npm run dev:api:real` with a real `MONGO_URI` |
+|                                        |                                                                                                    |
